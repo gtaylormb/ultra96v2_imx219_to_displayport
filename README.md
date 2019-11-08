@@ -5,7 +5,7 @@ This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX
 
 The video clock is running at 148.5MHz for 1080p (provided by MMCM in PL), and the video cores and AXI configuration interfaces are running at 150MHz (provided by pl_clk0 output from PS).
 
-The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstream' on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI. You should be able to open the Xilinx xsdk workspace directly.
+The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstream' on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI. You should be able to open the Xilinx SDK workspace directly.
 
 Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-with-ultra96-777721">very similiar project</a> using the Digilent Pcam 5C (Omnivision OV5640) at 720p.
 
