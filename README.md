@@ -14,7 +14,7 @@ Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-wi
 ## Hardware used
 * Ultra96-V2 Zynq UltraScale+ ZU3EG Evaluation Board
 * Raspberry Pi v2 camera (Sony IMX219 sensor)
-* 96Boards MIPI Adapter
+* Aistarvision 96Boards MIPI Adapter V2.1
 
 ## IP cores used
 * MIPI-CS2 Rx Subsystem
