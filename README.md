@@ -19,6 +19,7 @@ Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-wi
 * Sensor Demosaic
 * Gamma LUT
 * AXI Video Direct Memory Access
+* AXI SmartConnect
 * Video Timing Generator
 * AXI-4 Stream to Video Out
 * Video Test Pattern Generator (optional)
@@ -29,3 +30,38 @@ https://www.youtube.com/watch?v=tWB6uOOUVC8
 
 ## Block Diagram
 <img src="https://i.imgur.com/w5njlpG.png">
+
+## Utilization in xczu3eg (No Video TPG or ILAs)
+    +----------------------------+-------+-------+-----------+-------+
+    |          Site Type         |  Used | Fixed | Available | Util% |
+    +----------------------------+-------+-------+-----------+-------+
+    | CLB LUTs                   | 15352 |     0 |     70560 | 21.76 |
+    |   LUT as Logic             | 14209 |     0 |     70560 | 20.14 |
+    |   LUT as Memory            |  1143 |     0 |     28800 |  3.97 |
+    |     LUT as Distributed RAM |   786 |     0 |           |       |
+    |     LUT as Shift Register  |   357 |     0 |           |       |
+    | CLB Registers              | 19828 |     0 |    141120 | 14.05 |
+    |   Register as Flip Flop    | 19828 |     0 |    141120 | 14.05 |
+    |   Register as Latch        |     0 |     0 |    141120 |  0.00 |
+    | CARRY8                     |   368 |     0 |      8820 |  4.17 |
+    | F7 Muxes                   |   200 |     0 |     35280 |  0.57 |
+    | F8 Muxes                   |     1 |     0 |     17640 | <0.01 |
+    | F9 Muxes                   |     0 |     0 |      8820 |  0.00 |
+    +----------------------------+-------+-------+-----------+-------+
+    
+    +-------------------+------+-------+-----------+-------+
+    |     Site Type     | Used | Fixed | Available | Util% |
+    +-------------------+------+-------+-----------+-------+
+    | Block RAM Tile    | 32.5 |     0 |       216 | 15.05 |
+    |   RAMB36/FIFO*    |   28 |     0 |       216 | 12.96 |
+    |     RAMB36E2 only |   28 |       |           |       |
+    |   RAMB18          |    9 |     0 |       432 |  2.08 |
+    |     RAMB18E2 only |    9 |       |           |       |
+    +-------------------+------+-------+-----------+-------+
+    
+    +----------------+------+-------+-----------+-------+
+    |    Site Type   | Used | Fixed | Available | Util% |
+    +----------------+------+-------+-----------+-------+
+    | DSPs           |    8 |     0 |       360 |  2.22 |
+    |   DSP48E2 only |    8 |       |           |       |
+    +----------------+------+-------+-----------+-------+
