@@ -12,9 +12,9 @@ The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstrea
 Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-with-ultra96-777721">very similiar project</a> using the Digilent Pcam 5C (Omnivision OV5640) at 720p.
 
 ## Hardware used
-* Ultra96-V2 Zynq UltraScale+ ZU3EG Evaluation Board
-* Raspberry Pi v2 camera (Sony IMX219 sensor)
-* Aistarvision 96Boards MIPI Adapter V2.1
+* <a href="http://zedboard.org/product/ultra96-v2-development-board">Ultra96-V2 Zynq UltraScale+ ZU3EG Evaluation Board</a>
+* <a href="https://www.raspberrypi.org/products/camera-module-v2/">Raspberry Pi v2 camera (Sony IMX219 sensor)</a>
+* <a href="https://www.96boards.org/product/mipiadapter/">AiStarVision 96Boards MIPI Adapter V2.1</a>
 
 ## IP cores used
 * MIPI-CS2 Rx Subsystem
