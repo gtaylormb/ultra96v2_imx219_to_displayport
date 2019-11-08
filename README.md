@@ -1,9 +1,11 @@
 # IMX219 MIPI sensor to Ultra96-V2 FPGA DisplayPort
 
 ## About
-This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Zynq MPSoC on the Ultra96-V2 board to the DisplayPort with very low latency. As the IMX219 is outputting 30FPS and my monitor (Dell P2214H) only supports 60Hz, this project uses the AXI Video DMA block to duplicate frames. If your monitor can do 30Hz you may have luck removing it, I can't tell. It uses all off the shelf FPGA IP blocks in Vivado, included with the SDSoC license that comes with the Ultra96. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software (running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the PL between the MIPI input and the DisplayPort output.
+This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Xilinx Zynq MPSoC on the Ultra96-V2 board to the DisplayPort with very low latency. It uses all off the shelf FPGA IP blocks in Vivado, included with the SDSoC license that comes with the Ultra96. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software (running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the PL between the MIPI input and the DisplayPort output.
 
 The video clock is running at 148.5MHz for 1080p (provided by MMCM in PL), and the video cores and AXI configuration interfaces are running at 150MHz (provided by pl_clk0 output from PS).
+
+As the IMX219 is outputting 30FPS and my monitor (Dell P2214H) only supports 60Hz, this project uses the AXI Video DMA block to duplicate frames. If your monitor can do 30Hz you may have luck removing it, I can't tell. 
 
 The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstream' on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI. You should be able to open the Xilinx SDK workspace directly.
 
