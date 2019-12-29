@@ -42,7 +42,7 @@ SIM_SRC = \
 IP_SRC = \
 	
 BD_SRC = \
-	bd/imx219_to_mpsoc_displayport.tcl
+	bd/imx219_to_mpsoc_displayport_vivado2019.2.tcl
 	
 XDC_SRC = \
 	constraints/Ultra96_V2_constraints_190430.xdc
