@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2014 - 2019 Xilinx, Inc.  All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ *
+ */
+
+/*********************************************************************
+ * Contains the function to call for processing a PM API call.
+ * The function (PmProcessRequest) is called from interrupt handler
+ * stubs, implemented in pm_binding files. The request is further
+ * processed according to the master that initiated request and
+ * API call's payload read from master's IPI buffer.
+ ********************************************************************/
+
+#ifndef PM_CORE_H_
+#define PM_CORE_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "pm_master.h"
+#include "xil_types.h"
+
+/*********************************************************************
+ * Function declarations
+ ********************************************************************/
+void PmProcessRequest(PmMaster *const master, const u32 *pload);
+void PmResetAssert(const PmMaster *const master, const u32 reset,
+		   const u32 action);
+void PmShutdownInterruptHandler(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* PM_CORE_H_ */

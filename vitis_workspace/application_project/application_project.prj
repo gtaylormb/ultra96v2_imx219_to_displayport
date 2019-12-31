@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="application_project" location="/home/taylorgr/git/ultra96v2_imx219_to_displayport/vitis_workspace/application_project" platform="/home/taylorgr/git/ultra96v2_imx219_to_displayport/vitis_workspace/platform_project/export/platform_project/platform_project.xpfm" platformUID="" systemProject="application_project_system" sysConfig="platform_project" runtime="C/C++" cpu="standalone_domain" cpuInstance="psu_cortexa53_0" os="standalone" dimmRepoPath="" mssSignature="b82f871452cff219c58da458e9a46552">
+  <configuration name="Debug" id="xilinx.gnu.arm.a53.exe.debug.217874096">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.arm.a53.exe.release.1125683504" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>
