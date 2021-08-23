@@ -36,7 +36,7 @@
 uname_O := $(shell sh -c 'uname -o 2>/dev/null || echo not')
 
 # set to ultra96v2 or kv260
-BOARD = kv260
+BOARD = ultra96v2
 
 RTL_SRC = \
 	
@@ -99,6 +99,7 @@ clean:
 	rm -rf  *.tmp  *.log  log transcript work *.wlf vsim.fcdb
 	rm -rf *~ core csrc simv* vc_hdrs.h ucli.key urg* *.log core.* synlog.tcl
 	rm -rf sim_lib build usage_stat* ipshared/ .Xil runhls.tcl design_1_v_tpg_0_0
+	rm -rf .srcs .gen .cache
 	
 build/design_1/design_1.bd: $(BD_SRC)
 	test -e build || mkdir build
