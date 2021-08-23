@@ -33,19 +33,31 @@
 #   along with imx219_to_mpsoc_displayport FPGA.  If not, see <http://www.gnu.org/licenses/>.
 #   
 #******************************************************************************
-uname_O := $(shell sh -c 'uname -o 2>/dev/null || echo not')	
+uname_O := $(shell sh -c 'uname -o 2>/dev/null || echo not')
+
+# set to ultra96v2 or kv260
+BOARD = kv260
 
 RTL_SRC = \
 	
 SIM_SRC = \
 	
 IP_SRC = \
-	
-BD_SRC = \
-	bd/imx219_to_mpsoc_displayport_vivado2021.1.tcl
-	
-XDC_SRC = \
-	constraints/Ultra96_V2_constraints_190430.xdc
+
+ifeq (${BOARD}, ultra96v2)
+    BD_SRC = \
+    	bd/imx219_to_ultra96v2_displayport_vivado2021.1.tcl
+    	
+    XDC_SRC = \
+    	constraints/Ultra96_V2_constraints_190430.xdc
+endif
+ifeq (${BOARD}, kv260)
+    BD_SRC = \
+    	bd/imx219_to_kria_displayport_vivado2021.1.tcl
+    	
+    XDC_SRC = \
+    	constraints/Kria_KV_CarrierCard_Rev1.xdc
+endif
 	
 INC_DIR0 = \
 	modules/
@@ -86,17 +98,17 @@ program: build/imx219_to_mpsoc_displayport.bit
 clean:
 	rm -rf  *.tmp  *.log  log transcript work *.wlf vsim.fcdb
 	rm -rf *~ core csrc simv* vc_hdrs.h ucli.key urg* *.log core.* synlog.tcl
-	rm -rf sim_lib build usage_stat* ipshared/ .Xil
+	rm -rf sim_lib build usage_stat* ipshared/ .Xil runhls.tcl design_1_v_tpg_0_0
 	
 build/design_1/design_1.bd: $(BD_SRC)
 	test -e build || mkdir build
 	vivado -mode batch -source scripts/vivado_bd.tcl -nojournal \
-	-log build/bd_log.txt -tclargs "$(BD_SRC)"
+	-log build/bd_log.txt -tclargs "$(BD_SRC)" "${BOARD}"
 
 build/post_syn.dcp: $(RTL_SRC) $(IP_SRC) $(XDC_SRC) build/design_1/design_1.bd
 	test -e build || mkdir build
 	vivado -mode batch -source scripts/vivado_syn.tcl -nojournal \
-	-log build/syn_log.txt -tclargs "$(RTL_SRC)" "$(INC_DIR0)" "$(IP_SRC)" "$(XDC_SRC)"
+	-log build/syn_log.txt -tclargs "$(RTL_SRC)" "$(INC_DIR0)" "$(IP_SRC)" "$(XDC_SRC)" "${BOARD}"
 
 build/post_place.dcp: build/post_syn.dcp
 	vivado -mode batch -source scripts/vivado_place.tcl -log build/place_log.txt -nojournal
@@ -105,4 +117,5 @@ build/post_route.dcp: build/post_place.dcp
 	vivado -mode batch -source scripts/vivado_route.tcl -log build/route_log.txt -nojournal
 	
 build/imx219_to_mpsoc_displayport.bit: build/post_route.dcp
-	vivado -mode batch -source scripts/vivado_bitstream.tcl -log build/bitstream_log.txt -nojournal	
+	vivado -mode batch -source scripts/vivado_bitstream.tcl -log build/bitstream_log.txt -nojournal	\
+	-tclargs "${BOARD}"
