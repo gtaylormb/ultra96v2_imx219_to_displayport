@@ -75,6 +75,10 @@ int imx219_init() {
 		XGpioPs_WritePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 0);
 		XGpioPs_WritePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
 	}
+	/*
+	 * For KV260, IMX219 power supply is enabled by FPGA pin tied high,
+	 * i2c expander reset_b is tied high on board
+	 */
 
     if ( (iic_config = XIicPs_LookupConfig(XPAR_PSU_I2C_1_DEVICE_ID)) == NULL) {
 		xil_printf("XIicPs_LookupConfig() failed\r\n");
