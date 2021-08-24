@@ -2,7 +2,7 @@
 
 ## News
 2021-8-22
-* The FPGA build scripts have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine which has been hard to come by. My board is on backorder until next year apparently so I haven't tested it. Please let me know if anyone has success with this.
+* The FPGA build scripts and software have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine which has been hard to come by. My board is on backorder until next year apparently so I haven't tested it. Please let me know if anyone has success with this.
 
 ## About
 This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Xilinx Zynq MPSoC on the Ultra96-V2 board to the DisplayPort with very low latency. It uses all off the shelf FPGA IP blocks in Vivado, included with the SDSoC license that comes with the Ultra96. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software (running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the PL between the MIPI input and the DisplayPort output.
