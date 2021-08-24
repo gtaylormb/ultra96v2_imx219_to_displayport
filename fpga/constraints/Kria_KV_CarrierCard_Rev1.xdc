@@ -4,12 +4,12 @@
 set_property PACKAGE_PIN F11      [get_ports "rpi_enable"] ;# Bank  45 VCCO - som240_1_b13 - IO_L6N_HDGC_45 (som240_1_a15)
 set_property PACKAGE_PIN F10      [get_ports "IIC_1_0_sda_io"] ;# Bank  45 VCCO - som240_1_b13 - IO_L5N_HDGC_45 (som240_1_d17)
 set_property PACKAGE_PIN G11      [get_ports "IIC_1_0_scl_io"] ;# Bank  45 VCCO - som240_1_b13 - IO_L5P_HDGC_45 (som240_1_d16)
-set_property PACKAGE_PIN F6       [get_ports "mipi_phy_if_0_data_n[1]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L15N_T2L_N5_AD11N_66 (som240_1_a10)
-set_property PACKAGE_PIN G6       [get_ports "mipi_phy_if_0_data_p[1]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L15P_T2L_N4_AD11P_66 (som240_1_a9)
-set_property PACKAGE_PIN D5       [get_ports "mipi_phy_if_0_data_n[0]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L14N_T2L_N3_GC_66 (som240_1_b11)
-set_property PACKAGE_PIN E5       [get_ports "mipi_phy_if_0_data_p[0]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L14P_T2L_N2_GC_66 (som240_1_b10)
-set_property PACKAGE_PIN D6       [get_ports "mipi_phy_if_0_clk_n"] ;# Bank  66 VCCO - som240_1_d1 - IO_L13N_T2L_N1_GC_QBC_66 (som240_1_c13)
-set_property PACKAGE_PIN D7       [get_ports "mipi_phy_if_0_clk_p"] ;# Bank  66 VCCO - som240_1_d1 - IO_L13P_T2L_N0_GC_QBC_66 (som240_1_c12)
+#set_property PACKAGE_PIN F6       [get_ports "mipi_phy_if_0_data_n[1]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L15N_T2L_N5_AD11N_66 (som240_1_a10)
+#set_property PACKAGE_PIN G6       [get_ports "mipi_phy_if_0_data_p[1]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L15P_T2L_N4_AD11P_66 (som240_1_a9)
+#set_property PACKAGE_PIN D5       [get_ports "mipi_phy_if_0_data_n[0]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L14N_T2L_N3_GC_66 (som240_1_b11)
+#set_property PACKAGE_PIN E5       [get_ports "mipi_phy_if_0_data_p[0]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L14P_T2L_N2_GC_66 (som240_1_b10)
+#set_property PACKAGE_PIN D6       [get_ports "mipi_phy_if_0_clk_n"] ;# Bank  66 VCCO - som240_1_d1 - IO_L13N_T2L_N1_GC_QBC_66 (som240_1_c13)
+#set_property PACKAGE_PIN D7       [get_ports "mipi_phy_if_0_clk_p"] ;# Bank  66 VCCO - som240_1_d1 - IO_L13P_T2L_N0_GC_QBC_66 (som240_1_c12)
 
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_a1"]; # Net name VCC_BATT
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_a3"]; # Net name HPA06_P
