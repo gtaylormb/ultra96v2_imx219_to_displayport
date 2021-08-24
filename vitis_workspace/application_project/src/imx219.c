@@ -35,6 +35,7 @@ SOFTWARE.
 #include "xgpiops.h"
 #include "xiicps.h"
 #include "imx219.h"
+#include "parameters.h"
 
 static XGpioPs gpio;
 static XIicPs iic;
@@ -43,6 +44,8 @@ int imx219_init() {
 	XGpioPs_Config *gpio_config;
 	XIicPs_Config *iic_config;
 	u8 bit_mask;
+	u8 i2c_expander_slave_addr;
+	u8 i2c_expander_control_bitmask;
 	u8 addr[2];
 	u8 camera_model_id[2];
 
@@ -55,21 +58,23 @@ int imx219_init() {
 		return XST_FAILURE;
 	}
 
-	// Reset and enable IMX219 power supplies
-	XGpioPs_SetDirectionPin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
-	XGpioPs_SetOutputEnablePin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
-	XGpioPs_WritePin(&gpio, IMX219_ENABLE_GPIO_PIN, 0);
-	usleep(100000);
-	XGpioPs_WritePin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
-	usleep(100000);
+	if (BOARD == ULTRA96) {
+		// Reset and enable IMX219 power supplies
+		XGpioPs_SetDirectionPin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
+		XGpioPs_SetOutputEnablePin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
+		XGpioPs_WritePin(&gpio, IMX219_ENABLE_GPIO_PIN, 0);
+		usleep(100000);
+		XGpioPs_WritePin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
+		usleep(100000);
 
-	xil_printf("Reset and enabled IMX219 power supplies\r\n");
+		xil_printf("Reset and enabled IMX219 power supplies\r\n");
 
-	// Reset i2c expander
-	XGpioPs_SetDirectionPin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
-	XGpioPs_SetOutputEnablePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
-	XGpioPs_WritePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 0);
-	XGpioPs_WritePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
+		// Reset i2c expander
+		XGpioPs_SetDirectionPin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
+		XGpioPs_SetOutputEnablePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
+		XGpioPs_WritePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 0);
+		XGpioPs_WritePin(&gpio, ULTRA_96_I2C_EXPANDER_RESET_N_GPIO_PIN, 1);
+	}
 
     if ( (iic_config = XIicPs_LookupConfig(XPAR_PSU_I2C_1_DEVICE_ID)) == NULL) {
 		xil_printf("XIicPs_LookupConfig() failed\r\n");
@@ -90,14 +95,22 @@ int imx219_init() {
 		return XST_FAILURE;
 	}
 
+	if (BOARD == ULTRA96) {
+		i2c_expander_slave_addr = ULTRA_96_I2C_EXPANDER_SLAVE_ADDR;
+		i2c_expander_control_bitmask = ULTRA_96_I2C_EXPANDER_HSEXP_I2C2_BIT_MASK;
+	}
+	else if (BOARD == KV260) {
+		i2c_expander_slave_addr = KV260_I2C_EXPANDER_SLAVE_ADDR;
+		i2c_expander_control_bitmask = KV260_I2C_EXPANDER_RPI_BIT_MASK;
+	}
 	// Read i2c expander chip control reg
-	if (XIicPs_MasterRecvPolled(&iic, &bit_mask, 1, ULTRA_96_I2C_EXPANDER_SLAVE_ADDR) != XST_SUCCESS) {
+	if (XIicPs_MasterRecvPolled(&iic, &bit_mask, 1, i2c_expander_slave_addr) != XST_SUCCESS) {
 		xil_printf("i2c expander receive failed\r\n");
 		return XST_FAILURE;
 	}
 	usleep(1000); // chip needs some delay for some reason
-    bit_mask |= ULTRA_96_I2C_EXPANDER_HSEXP_I2C2_BIT_MASK;
-	if (XIicPs_MasterSendPolled(&iic, &bit_mask, 1, ULTRA_96_I2C_EXPANDER_SLAVE_ADDR) != XST_SUCCESS) {
+    bit_mask |= i2c_expander_control_bitmask;
+	if (XIicPs_MasterSendPolled(&iic, &bit_mask, 1, i2c_expander_slave_addr) != XST_SUCCESS) {
 		xil_printf("i2c expander send failed\r\n");
 		return XST_FAILURE;
 	}

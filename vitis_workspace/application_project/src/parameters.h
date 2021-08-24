@@ -33,6 +33,11 @@ SOFTWARE.
 #ifndef SRC_PARAMETERS_H_
 #define SRC_PARAMETERS_H_
 
+#define ULTRA96 0
+#define KV260   1
+
+#define BOARD			ULTRA96 // to UlTRA96 or KV260
+
 #define VIDEO_COLUMNS	1920
 #define VIDEO_ROWS		1080
 
