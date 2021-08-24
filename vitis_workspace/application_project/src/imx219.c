@@ -49,16 +49,16 @@ int imx219_init() {
 	u8 addr[2];
 	u8 camera_model_id[2];
 
-	if ( (gpio_config = XGpioPs_LookupConfig(XPAR_PSU_GPIO_0_DEVICE_ID)) == NULL) {
-		xil_printf("XGpioPs_LookupConfig() failed\r\n");
-		return XST_FAILURE;
-	}
-	if (XGpioPs_CfgInitialize(&gpio, gpio_config, gpio_config->BaseAddr)) {
-		xil_printf("XGpioPs_CfgInitialize() failed\r\n");
-		return XST_FAILURE;
-	}
+	if (BOARD == ULTRA96) {	
+		if ( (gpio_config = XGpioPs_LookupConfig(XPAR_PSU_GPIO_0_DEVICE_ID)) == NULL) {
+			xil_printf("XGpioPs_LookupConfig() failed\r\n");
+			return XST_FAILURE;
+		}
+		if (XGpioPs_CfgInitialize(&gpio, gpio_config, gpio_config->BaseAddr)) {
+			xil_printf("XGpioPs_CfgInitialize() failed\r\n");
+			return XST_FAILURE;
+		}
 
-	if (BOARD == ULTRA96) {
 		// Reset and enable IMX219 power supplies
 		XGpioPs_SetDirectionPin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
 		XGpioPs_SetOutputEnablePin(&gpio, IMX219_ENABLE_GPIO_PIN, 1);
@@ -80,11 +80,11 @@ int imx219_init() {
 	 * i2c expander reset_b is tied high on board
 	 */
 
-    if ( (iic_config = XIicPs_LookupConfig(XPAR_PSU_I2C_1_DEVICE_ID)) == NULL) {
+	if ( (iic_config = XIicPs_LookupConfig(XPAR_PSU_I2C_1_DEVICE_ID)) == NULL) {
 		xil_printf("XIicPs_LookupConfig() failed\r\n");
 		return XST_FAILURE;
 	}
-    if (XIicPs_CfgInitialize(&iic, iic_config, iic_config->BaseAddress) != XST_SUCCESS) {
+	if (XIicPs_CfgInitialize(&iic, iic_config, iic_config->BaseAddress) != XST_SUCCESS) {
 		xil_printf("XIicPs_CfgInitialize() failed\r\n");
 		return XST_FAILURE;
 	}
@@ -113,7 +113,7 @@ int imx219_init() {
 		return XST_FAILURE;
 	}
 	usleep(1000); // chip needs some delay for some reason
-    bit_mask |= i2c_expander_control_bitmask;
+	bit_mask |= i2c_expander_control_bitmask;
 	if (XIicPs_MasterSendPolled(&iic, &bit_mask, 1, i2c_expander_slave_addr) != XST_SUCCESS) {
 		xil_printf("i2c expander send failed\r\n");
 		return XST_FAILURE;

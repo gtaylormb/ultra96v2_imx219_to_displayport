@@ -1,11 +1,11 @@
-# IMX219 MIPI sensor to Ultra96-V2 FPGA DisplayPort
+# IMX219 MIPI sensor to Ultra96-V2/Kria KV260 FPGA DisplayPort
 
 ## News
 2021-8-22
-* The FPGA build scripts have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine which has been hard to come by. My board is on backorder until next year apparently so I haven't tested it. Please let me know if anyone has success with this.
+* The FPGA build scripts and software have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine which has been hard to come by. My board is on backorder until next year apparently so I haven't tested it. Please let me know if anyone has success with this.
 
 ## About
-This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Xilinx Zynq MPSoC on the Ultra96-V2 board to the DisplayPort with very low latency. It uses all off the shelf FPGA IP blocks in Vivado, included with the SDSoC license that comes with the Ultra96. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software (running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the PL between the MIPI input and the DisplayPort output.
+This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Xilinx Zynq MPSoC DisplayPort with very low latency. It uses all off the shelf FPGA IP blocks in Vivado, all included with the free WebPACK version of the software. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software (running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the PL between the MIPI input and the DisplayPort output.
 
 The video clock is running at 148.5MHz for 1080p (provided by MMCM in PL), and the video cores and AXI configuration interfaces are running at 150MHz (provided by pl_clk0 output from PS).
 
@@ -16,9 +16,9 @@ The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstrea
 Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-with-ultra96-777721">very similiar project</a> using the Digilent Pcam 5C (Omnivision OV5640) at 720p.
 
 ## Hardware used
-* <a href="http://zedboard.org/product/ultra96-v2-development-board">Ultra96-V2 Zynq UltraScale+ ZU3EG Evaluation Board</a>
+* <a href="http://zedboard.org/product/ultra96-v2-development-board">Ultra96-V2 Zynq UltraScale+ ZU3EG Evaluation Board</a> OR <a href="https://www.xilinx.com/products/som/kria/kv260-vision-starter-kit.html">Kria KV260 Vision AI Starter Kit</a>
 * <a href="https://www.raspberrypi.org/products/camera-module-v2/">Raspberry Pi v2 camera (Sony IMX219 sensor)</a>
-* <a href="https://www.96boards.org/product/mipiadapter/">AiStarVision 96Boards MIPI Adapter V2.1</a>
+* <a href="https://www.96boards.org/product/mipiadapter/">AiStarVision 96Boards MIPI Adapter V2.1 (only required for Ultra96-V2)</a>
 
 ## IP cores used
 * MIPI-CS2 Rx Subsystem
