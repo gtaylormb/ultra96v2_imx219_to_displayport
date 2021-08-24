@@ -1,15 +1,26 @@
 # Xilinx design constraints (XDC) file for Kria KV Carrier Card - Rev 1
 
+# copied over from Kria_K26_SOM_Rev1.xdc so we only have to add 1 .xdc file
+set_property PACKAGE_PIN F11      [get_ports "rpi_enable"] ;# Bank  45 VCCO - som240_1_b13 - IO_L6N_HDGC_45 (som240_1_a15)
+set_property PACKAGE_PIN F10      [get_ports "IIC_1_0_sda_io"] ;# Bank  45 VCCO - som240_1_b13 - IO_L5N_HDGC_45 (som240_1_d17)
+set_property PACKAGE_PIN G11      [get_ports "IIC_1_0_scl_io"] ;# Bank  45 VCCO - som240_1_b13 - IO_L5P_HDGC_45 (som240_1_d16)
+set_property PACKAGE_PIN F6       [get_ports "mipi_phy_if_0_data_n[1]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L15N_T2L_N5_AD11N_66 (som240_1_a10)
+set_property PACKAGE_PIN G6       [get_ports "mipi_phy_if_0_data_p[1]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L15P_T2L_N4_AD11P_66 (som240_1_a9)
+set_property PACKAGE_PIN D5       [get_ports "mipi_phy_if_0_data_n[0]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L14N_T2L_N3_GC_66 (som240_1_b11)
+set_property PACKAGE_PIN E5       [get_ports "mipi_phy_if_0_data_p[0]"] ;# Bank  66 VCCO - som240_1_d1 - IO_L14P_T2L_N2_GC_66 (som240_1_b10)
+set_property PACKAGE_PIN D6       [get_ports "mipi_phy_if_0_clk_n"] ;# Bank  66 VCCO - som240_1_d1 - IO_L13N_T2L_N1_GC_QBC_66 (som240_1_c13)
+set_property PACKAGE_PIN D7       [get_ports "mipi_phy_if_0_clk_p"] ;# Bank  66 VCCO - som240_1_d1 - IO_L13P_T2L_N0_GC_QBC_66 (som240_1_c12)
+
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_a1"]; # Net name VCC_BATT
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_a3"]; # Net name HPA06_P
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_a4"]; # Net name HPA06_N
 #set_property IOSTANDARD  LVCMOS12 [get_ports "som240_1_a6"]; # Net name HPA_CLK0_P_NC
 #set_property IOSTANDARD  LVCMOS12 [get_ports "som240_1_a7"]; # Net name HPA_CLK0_N_NC
-set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_p[1]"]; # Net name HPA12_P
-set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_n[1]"]; # Net name HPA12_N
+set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_p[1]"]; # Net name HPA12_P (som240_1_a9)
+set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_n[1]"]; # Net name HPA12_N (som240_1_a10)
 #set_property IOSTANDARD  LVCMOS12 [get_ports "som240_1_a12"]; # Net name HPA13_P_NC
 #set_property IOSTANDARD  LVCMOS12 [get_ports "som240_1_a13"]; # Net name HPA13_N_NC
-#set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_a15"]; # Net name HDA09
+set_property IOSTANDARD  LVCMOS33 [get_ports "rpi_enable"]; # Net name HDA09 (som240_1_a15)
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_a16"]; # Net name HDA10
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_a17"]; # Net name HDA11
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_a19"]; # Net name VCCOEN_PS_M2C
@@ -47,8 +58,8 @@ set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_n[1]"]; # 
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_b5"]; # Net name HPA04_N
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_b7"]; # Net name HPA07_P
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_b8"]; # Net name HPA07_N
-set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_p[0]"]; # Net name HPA11_P
-set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_n[0]"]; # Net name HPA11_N
+set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_p[0]"]; # Net name HPA11_P (som240_1_b10)
+set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_n[0]"]; # Net name HPA11_N (som240_1_b11)
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_b13"]; # Net name PL_3V3
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_b14"]; # Net name PL_3V3
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_b16"]; # Net name HDA03
@@ -88,8 +99,8 @@ set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_data_n[0]"]; # 
 #set_property IOSTANDARD  MIPI_DPHY_DCI  [get_ports "som240_1_c7"]; # Net name HPA03_N
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_c9"]; # Net name HPA08_P
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_c10"]; # Net name HPA08_N
-set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_p"]; # Net name HPA10_CC_P
-set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_n"]; # Net name HPA10_CC_N
+set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_p"]; # Net name HPA10_CC_P (som240_1_c12)
+set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_n"]; # Net name HPA10_CC_N (som240_1_c13)
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_c15"]; # Net name PS_POR_B
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_c16"]; # Net name PS_SRST_C2M_B
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_c18"]; # Net name HDA06_NC
@@ -132,8 +143,8 @@ set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_n"]; # Net 
 #set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "som240_1_d11"]; # Net name HPA09_N
 #set_property IOSTANDARD  LVCMOS12 [get_ports "som240_1_d13"]; # Net name HPA14_P_NC
 #set_property IOSTANDARD  LVCMOS12 [get_ports "som240_1_d14"]; # Net name HPA14_N_NC
-#set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_d16"]; # Net name HDA00_CC
-#set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_d17"]; # Net name HDA01
+set_property IOSTANDARD  LVCMOS33 [get_ports "IIC_1_0_scl_io"]; # Net name HDA00_CC (som240_1_d16)
+set_property IOSTANDARD  LVCMOS33 [get_ports "IIC_1_0_sda_io"]; # Net name HDA01 (som240_1_d17)
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_d18"]; # Net name HDA02
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_d20"]; # Net name HDA12
 #set_property IOSTANDARD  LVCMOS33 [get_ports "som240_1_d21"]; # Net name HDA13
@@ -164,12 +175,12 @@ set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_n"]; # Net 
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_d58"]; # Net name GTR_DP2_M2C_N
 #set_property IOSTANDARD  LVCMOSxx [get_ports "som240_1_d60"]; # Net name SOM_5V0
 
-#set_property SLEW SLOW [get_ports "som240_1_d16"]; # Net name HDA00_CC
-#set_property SLEW SLOW [get_ports "som240_1_d17"]; # Net name HDA01
+set_property SLEW SLOW [get_ports "IIC_1_0_scl_io"]; # Net name HDA00_CC
+set_property SLEW SLOW [get_ports "IIC_1_0_sda_io"]; # Net name HDA01
 #set_property SLEW SLOW [get_ports "som240_1_d18"]; # Net name HDA02
 #set_property SLEW SLOW [get_ports "som240_1_b16"]; # Net name HDA03
 #set_property SLEW SLOW [get_ports "som240_1_b17"]; # Net name HDA04
-#set_property SLEW SLOW [get_ports "som240_1_a15"]; # Net name HDA09
+set_property SLEW SLOW [get_ports "rpi_enable"]; # Net name HDA09 (som240_1_a15)
 #set_property SLEW SLOW [get_ports "som240_1_a17"]; # Net name HDA11
 #set_property SLEW SLOW [get_ports "som240_1_d20"]; # Net name HDA12
 #set_property SLEW SLOW [get_ports "som240_1_d21"]; # Net name HDA13
@@ -180,12 +191,12 @@ set_property IOSTANDARD  MIPI_DPHY_DCI [get_ports "mipi_phy_if_0_clk_n"]; # Net 
 #set_property SLEW SLOW [get_ports "som240_1_b22"]; # Net name HDA17
 #set_property SLEW SLOW [get_ports "som240_1_c24"]; # Net name HDA20
 
-#set_property DRIVE 4   [get_ports "som240_1_d16"]; # Net name HDA00_CC
-#set_property DRIVE 4   [get_ports "som240_1_d17"]; # Net name HDA01
+set_property DRIVE 4   [get_ports "IIC_1_0_scl_io"]; # Net name HDA00_CC
+set_property DRIVE 4   [get_ports "IIC_1_0_sda_io"]; # Net name HDA01
 #set_property DRIVE 4   [get_ports "som240_1_d18"]; # Net name HDA02
 #set_property DRIVE 4   [get_ports "som240_1_b16"]; # Net name HDA03
 #set_property DRIVE 4   [get_ports "som240_1_b17"]; # Net name HDA04
-#set_property DRIVE 4   [get_ports "som240_1_a15"]; # Net name HDA09
+set_property DRIVE 4   [get_ports "rpi_enable"]; # Net name HDA09
 #set_property DRIVE 4   [get_ports "som240_1_a17"]; # Net name HDA11
 #set_property DRIVE 4   [get_ports "som240_1_d20"]; # Net name HDA12
 #set_property DRIVE 4   [get_ports "som240_1_d21"]; # Net name HDA13
