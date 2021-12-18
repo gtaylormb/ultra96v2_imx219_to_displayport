@@ -1,19 +1,34 @@
 # IMX219 MIPI sensor to Ultra96-V2/Kria KV260 FPGA DisplayPort
 
 ## News
+2021-12-18
+* I finally got my KV260 board so that's a work in progress. The FPGA builds and I fixed some obscure bug in the software so it runs. I'm currently only getting a single frame on the display so I'll be debugging that next.
+
 2021-8-22
-* The FPGA build scripts and software have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine which has been hard to come by. My board is on backorder until next year apparently so I haven't tested it. Please let me know if anyone has success with this.
+* The FPGA build scripts and software have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine
+  which has been hard to come by. My board is on backorder until next year apparently so I haven't tested it. Please let me know if anyone has success with this.
 
 ## About
-This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Xilinx Zynq MPSoC DisplayPort with very low latency. It uses all off the shelf FPGA IP blocks in Vivado, all included with the free WebPACK version of the software. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software (running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the PL between the MIPI input and the DisplayPort output.
+This project enables 1080p 30FPS video from the Raspberry Pi v2 camera (Sony IMX219) to stream through the PL portion of the Xilinx Zynq MPSoC DisplayPort with very low latency. It uses all off the shelf FPGA IP blocks
+in Vivado, all included with the free WebPACK version of the software. After wiring up the block design in IP Integrator within Vivado, most of the work was configuring the cores and the IMX219 in software
+(running baremetal on the Zynq MPSoC PS). I had to do a lot of research and trial and error to get this to work, so hopefully this should save you some time and provide a good baseline design for doing video DSP in the
+PL between the MIPI input and the DisplayPort output.
 
-The video clock is running at 148.5MHz for 1080p (provided by MMCM in PL), and the video cores and AXI configuration interfaces are running at 150MHz (provided by pl_clk0 output from PS).
+The video clock is running at 148.5MHz for 1080p (provided by MMCM in PL), and the video cores and AXI configuration interfaces are running at 150MHz for the Ultra96-V2, 250MHz for the KV260 (provided by pl_clk0 output from PS).
 
 As the IMX219 is outputting 30FPS and my monitor (Dell P2214H) only supports 60Hz, this project uses the AXI Video DMA block to duplicate frames. If your monitor can do 30Hz you may have luck removing it, I can't tell. 
 
-The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstream' on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI.
+The FPGA Block Diagram was exported as a TCL script. Set line 39 of `fpga/Makefile` to your board type:
 
-Create a new Vitis workspace, a new platform project from the hardware definition created by 'make bitstream' above, a new empty C application project and then copy software/src/* into the application source directory.
+    # set to ultra96v2 or kv260
+    BOARD = kv260
+
+To build run `make bitstream` on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI.
+
+Create a new Vitis workspace, a new platform project from `fpga/build/imx219_to_mpsoc_displayport.xsa` created by `make bitstream` above, a new empty C application project and then copy `software/src/*` into the application source directory.
+Set line 39 of `src/parameters.h` to your board type:
+
+    #define BOARD           KV260 // set to UlTRA96 or KV260
 
 Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-with-ultra96-777721">very similiar project</a> using the Digilent Pcam 5C (Omnivision OV5640) at 720p.
 
