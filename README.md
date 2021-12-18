@@ -11,7 +11,9 @@ The video clock is running at 148.5MHz for 1080p (provided by MMCM in PL), and t
 
 As the IMX219 is outputting 30FPS and my monitor (Dell P2214H) only supports 60Hz, this project uses the AXI Video DMA block to duplicate frames. If your monitor can do 30Hz you may have luck removing it, I can't tell. 
 
-The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstream' on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI. You should be able to open the Xilinx SDK workspace directly.
+The FPGA Block Diagram was exported as a TCL script. To build run 'make bitstream' on the command line in the fpga folder. You can also import the block diagram in the TCL script into a Vivado project by sourcing it inside the Vivado GUI.
+
+Create a new Vitis workspace, a new platform project from the hardware definition created by 'make bitstream' above, a new empty C application project and then copy software/src/* into the application source directory.
 
 Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-with-ultra96-777721">very similiar project</a> using the Digilent Pcam 5C (Omnivision OV5640) at 720p.
 
