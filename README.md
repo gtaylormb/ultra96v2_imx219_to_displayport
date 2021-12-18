@@ -28,7 +28,7 @@ To build run `make bitstream` on the command line in the fpga folder. You can al
 Create a new Vitis workspace, a new platform project from `fpga/build/imx219_to_mpsoc_displayport.xsa` created by `make bitstream` above, a new empty C application project and then copy `software/src/*` into the application source directory.
 Set line 39 of `src/parameters.h` to your board type:
 
-    #define BOARD           KV260 // set to UlTRA96 or KV260
+    #define BOARD           KV260 // set to ULTRA96 or KV260
 
 Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-with-ultra96-777721">very similiar project</a> using the Digilent Pcam 5C (Omnivision OV5640) at 720p.
 
