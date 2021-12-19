@@ -2,7 +2,7 @@
 
 ## News
 2021-12-18
-* I finally got my KV260 board so that's a work in progress. The FPGA builds and I fixed some obscure bug in the software so it runs. I'm currently only getting a single frame on the display so I'll be debugging that next.
+* I finally got my KV260 so the project works on that board now as well!
 
 2021-8-22
 * The FPGA build scripts and software have been updated to optionally target the Kria KV260 Vision AI Starter Kit. This board is cheaper than the Ultra96-V2, more powerful, and does not require the MIPI adaptor mezzanine

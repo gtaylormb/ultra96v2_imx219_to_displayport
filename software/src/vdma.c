@@ -54,6 +54,7 @@ int vdma_init() {
 		return XST_FAILURE;
 	}
 
+	memset(&dma_setup, 0, sizeof(XAxiVdma_DmaSetup));
 	dma_setup.VertSizeInput = VIDEO_ROWS;
 	dma_setup.HoriSizeInput = VIDEO_COLUMNS*(vdma_config->Mm2SStreamWidth>>3);
 	dma_setup.Stride = dma_setup.HoriSizeInput;
@@ -63,8 +64,8 @@ int vdma_init() {
 	dma_setup.PointNum = 0;
 	dma_setup.EnableFrameCounter = 0;
     dma_setup.FixedFrameStoreAddr = 0;
-//    dma_setup.GenLockRepeat;      They didn't set these in the example
-//    dma_setup.EnableVFlip = 0;
+    dma_setup.GenLockRepeat = 0;
+    dma_setup.EnableVFlip = 0;
 
     if (XAxiVdma_DmaConfig(&vdma, XAXIVDMA_WRITE, &dma_setup) != XST_SUCCESS) {
     	xil_printf("XAxiVdma_DmaConfig() for write engine failed\r\n");
