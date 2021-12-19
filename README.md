@@ -1,4 +1,4 @@
-# IMX219 MIPI sensor to Ultra96-V2/Kria KV260 FPGA DisplayPort
+# IMX219 MIPI sensor 1080p/30fps video to Ultra96-V2/Kria KV260 FPGA DisplayPort
 
 ## News
 2021-12-18
