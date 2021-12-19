@@ -52,7 +52,7 @@ Adam Taylor has a <a href="https://www.hackster.io/adam-taylor/mipi-procesing-wi
 https://www.youtube.com/watch?v=tWB6uOOUVC8
 
 ## Block Diagram
-<img src="https://i.imgur.com/w5njlpG.png">
+<img src="https://i.imgur.com/JTQs44h.png">
 
 ## Utilization in xczu3eg (No Video TPG or ILAs)
     +----------------------------+-------+-------+------------+-----------+-------+
