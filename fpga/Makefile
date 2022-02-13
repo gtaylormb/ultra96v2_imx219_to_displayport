@@ -53,7 +53,7 @@ ifeq (${BOARD}, ultra96v2)
 endif
 ifeq (${BOARD}, kv260)
     BD_SRC = \
-    	bd/imx219_to_kria_displayport_vivado2021.1.tcl
+    	bd/imx219_to_kria_displayport_vivado2021.2.tcl
     	
     XDC_SRC = \
     	constraints/Kria_KV_CarrierCard_Rev1.xdc
@@ -99,7 +99,7 @@ clean:
 	rm -rf  *.tmp  *.log  log transcript work *.wlf vsim.fcdb
 	rm -rf *~ core csrc simv* vc_hdrs.h ucli.key urg* *.log core.* synlog.tcl
 	rm -rf sim_lib build usage_stat* ipshared/ .Xil runhls.tcl design_1_v_tpg_0_0
-	rm -rf .srcs .gen .cache ../../.gen
+	rm -rf .srcs .gen .cache ../../.gen prj
 	
 # really stupid that Vivado creates a ../../.gen folder^, can't figure out why it's not within the build tree
 	
